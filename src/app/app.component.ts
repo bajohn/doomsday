@@ -6,14 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'doomsday';
-  second = 12 * 60 * 60 - 15 * 60; // second of day
+
+  electionDate = new Date('2020-11-04T00:00:00');
+  secondsPerDay = 10; // display seconds to real days
+  clockSeconds = this.curClockSeconds(); //12 * 60 * 60 - 15 * 60; // second of day on clock
+
   constructor() {
   }
   ngOnInit() {
     setInterval(() => {
-      this.second += 1;
-    }, 1)
+      this.clockSeconds = this.curClockSeconds();
+    }, 1000);
   }
 
   minuteHandRotation() {
@@ -26,8 +29,8 @@ export class AppComponent implements OnInit {
   }
 
   clockMinute() {
-    const minute = Math.round(this.second / 60) % 60;
-    if (minute < 10) {
+    const minute = Math.round(this.clockSeconds / 60) % 60;
+    if (Math.abs(minute) < 10) {
       return `0${minute}`;
     } else {
       return minute;
@@ -35,15 +38,27 @@ export class AppComponent implements OnInit {
   }
 
   clockHour() {
-    return Math.floor((this.second / 60) / 60) % 12;
+    return Math.floor((this.clockSeconds / 60) / 60) % 12;
+  }
+
+  curClockSeconds() {
+    const curSeconds = (new Date()).getTime() / 1000;
+    const electionSeconds = this.electionDate.getTime() / 1000;
+    const daysLeft = (electionSeconds - curSeconds) / (24 * 3600);
+    const secondsFromMidnight = daysLeft * this.secondsPerDay;
+
+    const midnightSeconds = 24 * 3600;
+    const ret = midnightSeconds - secondsFromMidnight;
+
+    return ret;
   }
 
   private hourHandAngle() {
-    return 360 / 12 / 60 * this.second / 60;
+    return 360 / 12 / 60 * this.clockSeconds / 60;
   }
 
   private minuteHandAngle() {
-    return 360 / 60 * this.second / 60;
+    return 360 / 60 * this.clockSeconds / 60;
   }
 
 }
