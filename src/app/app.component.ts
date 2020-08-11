@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   clockMinute() {
-    const minute = Math.round(this.clockSeconds / 60) % 60;
+    const minute = Math.floor(this.clockSeconds / 60) % 60;
     if (Math.abs(minute) < 10) {
       return `0${minute}`;
     } else {
@@ -38,18 +38,19 @@ export class AppComponent implements OnInit {
   }
 
   clockHour() {
-    return Math.floor((this.clockSeconds / 60) / 60) % 12;
+    return Math.floor((this.clockSeconds / 60 / 60) % 12);
   }
 
   curClockSeconds() {
     const curSeconds = (new Date()).getTime() / 1000;
     const electionSeconds = this.electionDate.getTime() / 1000;
     const daysLeft = (electionSeconds - curSeconds) / (24 * 3600);
+    console.log(daysLeft);
     const secondsFromMidnight = daysLeft * this.secondsPerDay;
-
-    const midnightSeconds = 24 * 3600;
+    console.log(secondsFromMidnight);
+    const midnightSeconds = 12 * 3600;
     const ret = midnightSeconds - secondsFromMidnight;
-
+    console.log(ret);
     return ret;
   }
 
