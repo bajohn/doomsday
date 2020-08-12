@@ -1,4 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%; background-color:rgb(252 136 71); }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.header {
+    font-family: Franklin Gothic Medium,Franklin Gothic,ITC Franklin Gothic,Arial,sans-serif;
+    font-size: 50px;
+    line-height: normal;
+    font-weight:700;
+}
+
+.page {
+    height:95%;
+    padding:10px;
+    min-width: 320px;
+    max-width: 568px;
+    background-color: rgb(252 136 71);
+}
+
+.nopad {
+    margin:0;
+}
+.large-text {
+    padding:7px;
+    font-size: 25px;
+    line-height: normal;
+}
+
+.bold {
+    font-weight:700;
+}
+
+.no-underline {
+    text-decoration:none;
+}

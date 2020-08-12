@@ -9,54 +9,89 @@ export class AppComponent implements OnInit {
 
   electionDate = new Date('2020-11-04T00:00:00');
   secondsPerDay = 10; // display seconds to real days
-  clockSeconds = this.curClockSeconds(); //12 * 60 * 60 - 15 * 60; // second of day on clock
+  daySeconds = this.updatedDaySeconds(); //12 * 60 * 60 - 15 * 60; // seconds of day on clock
 
   constructor() {
   }
   ngOnInit() {
+    //this.testClock();
+    this.startClock();
+  }
+
+  startClock() {
     setInterval(() => {
-      this.clockSeconds = this.curClockSeconds();
+      this.daySeconds = this.updatedDaySeconds();
+
     }, 1000);
   }
 
+  // Run super fast for debugging
+  testClock() {
+    setInterval(() => {
+      this.daySeconds = this.daySeconds += 1;
+    }, 1);
+  }
+
   minuteHandRotation() {
-    return `rotate(${this.minuteHandAngle()} 80 80 )`;
+    return `rotate(${this.minuteHandAngle()} 60 60 )`;
   }
 
 
   hourHandRotation() {
-    return `rotate(${this.hourHandAngle()} 80 80 )`;
+    return `rotate(${this.hourHandAngle()} 60 60 )`;
+  }
+
+  // seconds of a minute
+  clockSeconds() {
+    const seconds = this.daySeconds & 60;
+    return this.prependZero(seconds);
+
   }
 
   clockMinute() {
-    const minute = Math.floor(this.clockSeconds / 60) % 60;
-    if (Math.abs(minute) < 10) {
-      return `0${minute}`;
-    } else {
-      return minute;
-    }
+    const minute = Math.floor(this.daySeconds / 60) % 60;
+    return this.prependZero(minute);
   }
 
   clockHour() {
-    return Math.floor((this.clockSeconds / 60 / 60) % 12);
+    return Math.floor((this.daySeconds / 60 / 60) % 12);
   }
 
-  curClockSeconds() {
+  remainingTimeText() {
+    const midnightSeconds = 12 * 3600;
+    const secondsToMidnight = midnightSeconds - this.daySeconds;
+    console.log(secondsToMidnight)
+    const minutes = secondsToMidnight / 60;
+    const seconds = secondsToMidnight - minutes * 60;
+    return `${Math.floor(minutes)} minutes and ${Math.floor(seconds)} seconds`
+  }
+
+  private prependZero(val) {
+    if (Math.abs(val) < 10) {
+      return `0${val}`;
+    } else {
+      return val;
+    }
+  }
+
+  private updatedDaySeconds() {
     const curSeconds = (new Date()).getTime() / 1000;
     const electionSeconds = this.electionDate.getTime() / 1000;
     const daysLeft = (electionSeconds - curSeconds) / (24 * 3600);
-    const secondsFromMidnight = daysLeft * this.secondsPerDay;
+    const secondsToMidnight = daysLeft * this.secondsPerDay;
     const midnightSeconds = 12 * 3600;
-    const ret = midnightSeconds - secondsFromMidnight;
+    const ret = midnightSeconds - secondsToMidnight;
     return ret;
   }
 
+
+
   private hourHandAngle() {
-    return 360 / 12 / 60 * this.clockSeconds / 60;
+    return 360 / 12 / 60 * this.daySeconds / 60;
   }
 
   private minuteHandAngle() {
-    return 360 / 60 * this.clockSeconds / 60;
+    return 360 / 60 * this.daySeconds / 60;
   }
 
 }
