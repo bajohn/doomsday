@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   testClock() {
     setInterval(() => {
       this.daySeconds = this.daySeconds += 1;
-    }, 1);
+    }, 200);
   }
 
   minuteHandRotation() {
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
 
   // seconds of a minute
   clockSeconds() {
-    const seconds = this.daySeconds & 60;
+    const seconds = Math.floor(this.daySeconds % 60);
     return this.prependZero(seconds);
 
   }
@@ -61,9 +61,11 @@ export class AppComponent implements OnInit {
     const midnightSeconds = 12 * 3600;
     const secondsToMidnight = midnightSeconds - this.daySeconds;
     console.log(secondsToMidnight)
-    const minutes = secondsToMidnight / 60;
-    const seconds = secondsToMidnight - minutes * 60;
-    return `${Math.floor(minutes)} minutes and ${Math.floor(seconds)} seconds`
+    const minutes = Math.ceil(Math.floor(secondsToMidnight / 60) % 60);
+    const seconds = Math.ceil(secondsToMidnight - minutes * 60);
+    const minutesZeroed = seconds === 60 ? minutes + 1 : minutes;
+    const secondsZeroed = seconds === 60 ? 0 : seconds;
+    return `${minutesZeroed} minutes and ${secondsZeroed} seconds`;
   }
 
   private prependZero(val) {
@@ -79,6 +81,7 @@ export class AppComponent implements OnInit {
     const electionSeconds = this.electionDate.getTime() / 1000;
     const daysLeft = (electionSeconds - curSeconds) / (24 * 3600);
     const secondsToMidnight = daysLeft * this.secondsPerDay;
+    console.log(secondsToMidnight);
     const midnightSeconds = 12 * 3600;
     const ret = midnightSeconds - secondsToMidnight;
     return ret;
