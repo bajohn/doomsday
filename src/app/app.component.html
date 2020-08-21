@@ -5,7 +5,7 @@
     <svg version="1.1" id="Image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
       y="0px" viewBox="0 0 100 80">
       <title>
-        {{clockHour()}}:{{clockMinute()}}:{{clockSeconds()}}
+        {{timeService.clockHour()}}:{{timeService.clockMinute()}}:{{timeService.clockSeconds()}}
       </title>
       <!-- From default, we subtracted 20 from x and 30 from y -->
       <circle cx="60" cy="10" r="6" fill="white" />
@@ -15,30 +15,29 @@
 
       <circle cx="60" cy="60" r="4" fill="#333333" />
 
-      <line x1="60" y1="60" x2="60" y2="10" stroke="#333333" stroke-width="4" [attr.transform]="minuteHandRotation()" />
-      <line x1="60" y1="60" x2="60" y2="20" stroke="#333333" stroke-width="4" [attr.transform]="hourHandRotation()" />
+      <line x1="60" y1="60" x2="60" y2="10" stroke="#333333" stroke-width="4"
+        [attr.transform]="timeService.minuteHandRotation()" />
+      <line x1="60" y1="60" x2="60" y2="20" stroke="#333333" stroke-width="4"
+        [attr.transform]="timeService.hourHandRotation()" />
     </svg>
 
   </div>
 
-  <div class="header">
-    DOOMLECTION DAY COUNTDOWN
-  </div>
 
+
+  <router-outlet></router-outlet>
   <div>
-    <!-- {{clockHour()}}:{{clockMinute()}}:{{clockSeconds()}} -->
-    <div class="large-text bold">
-      There are {{remainingTimeText()}} until midnight.
+    <div class="float-icon">
+      <a href="" class="default-color">
+        <fa-icon class="fa-3x" [icon]="clockIcon"></fa-icon>
+      </a>
     </div>
-    <div class="large-text bold">
-      <a class="no-underline" href="http://register.rockthevote.com/"> Have you registered to vote?</a>
+    <div class="float-icon">
+      <a href="about" class="default-color">
+        <fa-icon class="fa-3x" [icon]="questionIcon"></fa-icon>
+      </a>
     </div>
   </div>
-
-
-
-
-  <!-- <router-outlet></router-outlet> -->
 
 
 </div>

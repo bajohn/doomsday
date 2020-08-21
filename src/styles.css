@@ -11,8 +11,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .page {
-    height:95%;
-    padding:10px;
+    height:100%;
+    padding-left:10px;
+    padding-right:10px;
     min-width: 320px;
     max-width: 568px;
     background-color: rgb(252 136 71);
@@ -33,4 +34,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .no-underline {
     text-decoration:none;
+}
+
+.icon-sizing {
+    width:400px;
+}
+
+a.default-color {
+    color:black
+}
+
+.float-icon {
+    float: left;
+    padding-right: 20px;
 }
