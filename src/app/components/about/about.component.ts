@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivePageService } from 'src/app/services/active-page.service';
 
 @Component({
   selector: 'app-about',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public pageService: ActivePageService
+  ) {
+    this.pageService.curPage = 'about';
+  }
 
   ngOnInit(): void {
   }

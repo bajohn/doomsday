@@ -46,9 +46,23 @@ a.default-color {
 
 .float-icon {
     float: left;
-    padding-right: 20px;
+    padding:10px;
 }
 
 .github-img {
     height: 42px;
+}
+
+.top-pad {
+    padding-top: 10px;
+}
+
+.inactive {
+    border: 3px solid rgba(256,0,0,.0);
+    border-radius: 5px;
+}
+
+.active {
+    border: 3px solid rgba(195,45,45,.4);
+    border-radius: 5px;
 }

@@ -1,6 +1,23 @@
 <div class="page">
 
   <div style="width:100%;">
+    <div class="top-pad">
+      <div class="float-icon" 
+      [class.active]="pageService.curPage==='home'" 
+      [class.inactive]="pageService.curPage!=='home'"> 
+        <a href="" class="default-color">
+          <fa-icon class="fa-3x" [icon]="clockIcon"></fa-icon>
+        </a>
+      </div>
+      <div class="float-icon" 
+      [class.active]="pageService.curPage==='about'"
+      [class.inactive]="pageService.curPage!=='about'"
+      >
+        <a href="about" class="default-color" >
+          <fa-icon class="fa-3x" [icon]="questionIcon"></fa-icon>
+        </a>
+      </div>
+    </div>
 
     <svg version="1.1" id="Image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
       y="0px" viewBox="0 0 100 80">
@@ -26,28 +43,6 @@
 
 
   <router-outlet></router-outlet>
-  <div>
-    <div class="float-icon">
-      <a href="" class="default-color">
-        <fa-icon class="fa-3x" [icon]="clockIcon"></fa-icon>
-      </a>
-    </div>
-    <div class="float-icon">
-      <a href="about" class="default-color">
-        <fa-icon class="fa-3x" [icon]="questionIcon"></fa-icon>
-      </a>
-    </div>
-    <div class="float-icon">
-      <a target="_blank" href="https://github.com/bajohn" class="default-color">
-        <img class="github-img" src="assets/github.png">
-      </a>
-    </div>
-    <div class="float-icon">
-      <a target="_blank" href="https://twitter.com/TuvoLLC" class="default-color">
-        <img class="github-img" src="assets/twitter.png">
-      </a>
-    </div>
-  </div>
 
 
 </div>
